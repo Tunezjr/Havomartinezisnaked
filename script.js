@@ -45,23 +45,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function makeDraggable(el) {
   let offsetX = 0, offsetY = 0, isDragging = false;
+  let startX, startY;  // Store initial position in px
 
   el.addEventListener("pointerdown", e => {
     isDragging = true;
-    offsetX = e.clientX - el.offsetLeft;
-    offsetY = e.clientY - el.offsetTop;
+    // Convert current vw/vh to px for dragging
+    startX = parseFloat(el.style.left) / 100 * window.innerWidth;
+    startY = parseFloat(el.style.top) / 100 * window.innerHeight;
+    offsetX = e.clientX - startX;
+    offsetY = e.clientY - startY;
     el.setPointerCapture(e.pointerId);
     el.style.zIndex = 1000;
+    el.style.transition = 'none';  // Disable CSS transitions during drag
   });
 
   el.addEventListener("pointermove", e => {
     if (!isDragging) return;
-    el.style.left = `${e.clientX - offsetX}px`;
-    el.style.top = `${e.clientY - offsetY}px`;
+    el.style.left = `${(e.clientX - offsetX) / window.innerWidth * 100}vw`;
+    el.style.top = `${(e.clientY - offsetY) / window.innerHeight * 100}vh`;
   });
 
   el.addEventListener("pointerup", () => {
     isDragging = false;
     el.style.zIndex = "";
+    el.style.transition = 'transform 0.2s ease';  // Re-enable transitions
   });
-} 
+}
