@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const items = [
+const items = [
     { img: "IMG_1603.jpeg", text: "that night still feels loud" },
     { img: "IMG_1584.jpeg", text: "you were there" },
     { img: "IMG_1587.jpeg", text: "this was the good part" },
