@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  background: #fafafa;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+#floor {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.memory,
+.text {
+  position: absolute;
+  transform-origin: center;
+}
+
+.memory {
+  width: clamp(180px, 25vw, 320px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.18);
+}
+
+.text {
+  font-size: clamp(14px, 2vw, 22px);
+  color: #111;
+  opacity: 0.85;
+  max-width: 240px;
+  pointer-events: none;
+}
