@@ -30,9 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
     img.className = "memory";
 
     img.onload = () => {
-      scatter(img);
-      floor.appendChild(img);
-    };
+  scatter(img);
+  makeDraggable(img);
+  floor.appendChild(img);
+};
 
     const text = document.createElement("div");
     text.className = "text";
@@ -41,3 +42,26 @@ document.addEventListener("DOMContentLoaded", () => {
     floor.appendChild(text);
   });
 });
+
+function makeDraggable(el) {
+  let offsetX = 0, offsetY = 0, isDragging = false;
+
+  el.addEventListener("pointerdown", e => {
+    isDragging = true;
+    offsetX = e.clientX - el.offsetLeft;
+    offsetY = e.clientY - el.offsetTop;
+    el.setPointerCapture(e.pointerId);
+    el.style.zIndex = 1000;
+  });
+
+  el.addEventListener("pointermove", e => {
+    if (!isDragging) return;
+    el.style.left = `${e.clientX - offsetX}px`;
+    el.style.top = `${e.clientY - offsetY}px`;
+  });
+
+  el.addEventListener("pointerup", () => {
+    isDragging = false;
+    el.style.zIndex = "";
+  });
+} 
