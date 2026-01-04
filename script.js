@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   items.forEach(item => {
     const img = new Image();
-    img.src = `images/${item.img}`;
+    img.src = `/${item.img}`;
     img.className = "memory";
 
     img.onload = () => {
